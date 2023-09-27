@@ -1,0 +1,96 @@
+Flow of Control (Ch. 4)
+
+Blocks
+    - List of statements enclosed by {}
+    - Considered as a single statement 
+    - no semicolon after closing }
+    - can be nested block in block
+    - Can define variables at beginning of Blocks  
+    Ex. 
+        {
+            int a, b;
+            a = 3;
+            b = a * 10;
+
+            //C99
+            int c;
+            c = a * b;
+        }
+
+
+Comparison and logical operators
+    - logical operators
+        - && = and
+        - || = or  
+        - ! = not
+    - results are either 0 or 1 - 0 is false and 1 is true 
+
+
+Ternary operators
+    - Takes three expressions as operands 
+    - exp1 ? exp2 : exp3
+    - exp1 is evaluated first and if it non-zero(true), exp2 is evaluated and its value is used as vvalue of ternary expressino
+    - if exp1 is zero  (false) - exp3 is evaluated and its value is used as ternary expression
+
+
+Do-while Loop
+    - Checks conditon after executing loop body
+        - statement is executed at least once
+    
+    ex.
+        int i = 0, sum = 0;
+        do {
+            sum = sum + i;
+            i++;
+        } while (i < 100);
+
+
+For loop
+    - Three expressions - initilization, condition, increment
+
+    ex. 
+        int i, sum;
+        sum = 0;
+        for (i=0; i < 100; i++) sum = sum + i; 
+
+
+Comma operators
+    - takes two expressions 
+        exp1, exp2
+        exp1 is evaluated first and then exp2
+    - lowest precedence
+    - associates from left to right
+
+
+Switch
+    - Also called 'selection' statement
+    ex. 
+        switch (i) {
+            case 0:
+                n0 ++; break; // break is needed or code will continue doing other cases
+            case 1:
+            case 2:
+            {
+                int a = d + 10;
+                n1 = a * 10; break;
+            }
+            default:
+                n_
+        }
+
+
+Break statement
+    - most commonly used in switch statements
+        - prevents fall-through to next case
+    - also works in loops
+        - loop execution terminated immediately, control resumes at statement following loop
+    
+
+Continue statement
+    - Skip rest of current loop iteration and continue to next one 
+    - can be used within for, while, and do-while loops
+        - can appear in a nested if/else 
+        -if used in nested loop, it applies to innermost enclosing loop
+        - for for loops, go to evlauation of the increment expression
+
+        

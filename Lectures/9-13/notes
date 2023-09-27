@@ -1,0 +1,94 @@
+ Arrays and Pointer Basics
+
+ Arrays
+    - represent linear - contigious collection of 'things'
+    - each thing in array has the same fixed type
+    - ex.
+        int x[5]; // define an array of 5 int's 
+
+        x[0] = 1; x[1] = 2 // index starts at 0
+
+        int y[5] = {1, 2, 3, 4, 5} // initialize array with list
+
+        int z[] = {1, 2, 3, 4, 5}; // nnumber of elements is optional if all elements are listed
+
+String initialization
+    - a string is a char array that ends with 0 (null character)
+    - it can be initialized with a list of characters
+    - or a string
+    - Memory that stores 0 is part of the string
+        - 0 is always at end of string
+
+        ex. char t[6] = "hello"; // 0 is added at end making it 6
+
+            printf("Array is: %s\n", t);
+
+Array as Automatic Variables
+    - You can declare ararys inside any function or block
+    - variable length arrays - the size of array can depend on function arguments / other known values
+
+Array Can not do Assignment
+    - You cannot assign a whole array at once to another array
+        - even when types match
+
+Array and Functions
+    - Arrays can be passed dto Functions
+        - one caveat
+    - calling convention in C
+        - by value for everything
+        - except arraysg
+    - Arrays are always passed by REFERENCE
+        - you can not pass it directly as it will make a duplicate
+        - passed as "pointers" - memory address to the array instead
+    - funciton can not return arrays
+
+
+Multidimensional Arrays
+    - declration and initialization
+    int h[2][3] = {{0, 1, 2}, {10, 11, 12}};
+
+
+Pointers 
+    - a value
+    - denoting address of a memory cell
+
+Variables and Memory
+    - Memory is an array of bytes
+    - Every byte in memory is numbered = the address!
+        - an address is unsigned integer
+
+    - every variable is kept in memory and associated with two numbers
+        - the address
+        - the value stored at that address
+
+Explicit Use: Pointers!
+    - a pointer is a variable that holds an ddress of something
+    - declaration
+    ex. // declare p to be a pointer to an int
+        int * p;
+
+        the value of p is an address of an int
+        p itself has an address
+
+Referencing and dereferncing
+    - Two new operators
+        - & reference: get the address of something
+        - * dereference: "use" the address
+
+    ex. 
+    int x = 10, y;
+
+    // px is apointer to int
+
+    int  *px; //px itself has an address
+
+    px = &x; // &x is the address of x and it is saved to px
+
+    // *px: use px as an address to get the value at that location
+    y = *px; // and save the value in you
+
+    // save 20 to location pointed to by px 
+    *px = 20; // px has x's address, so x becomes 20
+
+
+    
