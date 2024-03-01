@@ -1,0 +1,69 @@
+Pointer Arithmetic and Structures
+
+Pointers are Addresses
+    - value of a pointer is a byte Addresses   
+        - unsigned integer used to number bytes in memory
+    - corollary 
+        - if a pointer is an integer - you can do Arithmetic
+        - to compute other Addresses
+        int * p = malloc(sizeof(int)*10);
+        int * q =  p + 1
+
+
+Adding a Pointer and an integer
+    - Add an integer to a pointer results in a pointer of the same type
+        - it is different from regular integer addition
+        - integer is auto sclaed by size of the type pointed to
+
+    - suppose p is a pointer to type T, and k is an integer
+    - Both p+k k+p
+        - are valid expressions that evaluate to a pointer to Type T
+
+
+Pointers Subtraction
+    - Subtract one pointer from another = both must have same type
+    - Result is number of data itmes btw. two Pointers = not the number of bytes
+
+
+Pointer Comparisons
+    - Purpose
+        - check boundary conditions in arrays
+        - manually mamanage memory block
+    
+
+Effect of Casting Types
+    - if you cast a pointer type
+        - any subequent pointer arithmetic will use the type you choose
+    - If you do not want sclaing - cast a pointer to (char *)
+        - because sizeof(char) is 1
+
+
+    int * t;
+    char * p = (char *) t + 8; // 8 is not sclaed
+    char * q = (char *) (t + 8); // 8 is scaled
+
+
+Arrays and Pointers
+    - Arrays and pointers can often be used interchangeably
+    - equivalent ways of initializing an array
+
+    int a[10], *p = a; // not *p = a; it is int *p; p = a
+
+    for(int i=0; i<10; i++) a[i] = i;
+
+    for(int i=0; i<10; i++) p[i] = i;
+
+
+Structures
+    - Mechanism to define new Types
+        - also known as "compound types"
+        - used to aggregate related variables of different types
+
+    - Structures type declaration
+        - Structures can have a type name
+        - Cna have "members" of any type
+    - Structure variable defintion
+        - specifices variable name
+
+    - can be returned by functions - but structures can contain arrays that can be large
+        - use pointers to structures

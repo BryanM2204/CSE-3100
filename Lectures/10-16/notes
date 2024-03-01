@@ -1,0 +1,46 @@
+Redirection
+
+Shell Rediretctions
+    - available when executing command in your hsell
+        - implemented with the close/ open / dup technique
+
+        $ command <infile> outfile
+
+        < infile : take input from file infile
+        >outfile : send output to file outfile
+
+    - examples
+        $ sort < file.txt > sorted.txt
+
+        - sort will read lines from file.txt instead of terminal
+        - The output of sort will be saved in sorted.txt
+            - not seen on screen
+
+        - they read from stdin(0) and print to stdout(1)
+
+
+File Descriptor Table
+    - Each process has file decriptor Table
+        -points to an entry in the open file table 
+    - System wide open file table 
+        - records mode of opened files
+        - holds index into inode tale that has actual file name and location on disk
+
+
+Duplicating File Descriptor
+    - Do not change file descriptor table directly
+    - dup() copies old fd to first available entry
+    - dup2() copies old fd to new fd
+
+    dup2(3, 2)
+    close(3);
+
+    *ALWAYS CLOSE AFTER DUPPING**
+
+
+Summary of Steps in Child process
+    1. Close FDs that are opened in parent and not needed in Child
+    2. open(). Open a file(and save the file descriptor in fd)
+    3. dup2(). Copy FD to the right place
+    4. close(fd)
+    5. 

@@ -1,0 +1,27 @@
+Threads: POSIX Condition
+
+Tips
+    - Mutext protects
+        - the shared data and the state (predicate P)
+    - The condition variable
+        - lock the mutex before waiting
+            - the mutex is unlocked automatically while waiting
+            - automatically relock mutex when waking up
+
+Typical Structure of using mutex and condition
+ 
+    pthread_mutext_t mutex;
+    pthread_cond_t cond;
+
+    pthread_mutext_lock(&mutex);
+    while(! predicate ) {
+        pthread_cond_wait(&cond, &mutex);
+    }
+    access_shared_resources();
+    pthread_mutex_unlock(&mutex);
+
+
+Signal vs broadcast
+    - pthread_cond_signal(pthread_cond_t *cond);
+        - sends signal to only wake up one Threads
+    - pthread_cond_broadcast is used to wake up all threads

@@ -1,0 +1,116 @@
+Intro to Processes
+
+Process Basics 
+    - Porcess is instance of a program being executed
+
+    - in multiprocesssing OS
+        - multiple programs can be executed at same time
+        - multiple instance so pgroam can be executed at same time
+    - executing multiple programs 
+        - single-core : time -sharing
+        - multicore : true parallelism + time-sharing
+
+Process Management: OS View
+    - OS maintains a process table
+        - each process has table entry called process control block (PCB)
+
+    - OS scheduler - picks processes to be executed at given time  
+        - when process is suspended = state saved in PCB
+        
+
+Useful Commands
+    - ps 
+        - lsit running processes
+    - pstree
+        - display the tree of processes
+    - top 
+        - dynamic view of memory and CPU usage + processes that use most resources
+    - kill
+        - kill process given its process ID
+        - try -9 option if simple kill does not work
+
+Process Management - Programmer's View
+    - Process birth
+        - process created by other process
+        - process always starts as clone of its parents process
+        - then process may upgrade itself to run different executable
+            - child process retains access to files open in the parent
+    - Process life
+        - child process can create its own children processess
+    - Process death
+        - eventually calls exit or abort to commit suicide
+        - or gets killed
+
+
+Birth Via Cloning
+    - function to create new process in code:
+    #include <unistd.h>
+    pid_t fork(void);
+
+    - child is exact copy of parent
+        - both return from fork
+
+    - only difference is returned value
+        - in parent process:
+            fork() returns process identifier of the child >0
+            - if failure occurred - returns -1
+        - in child process
+            - fork() returns 0
+
+Concurrency
+    - parent and child processes return from fork() concurrently
+        - They may return at same time or one after the other
+        - cannot assume that they return at same time
+
+Cloning Effect
+    - On memory
+        - parent and child memory are identical
+        - but are viewed as distinct by OS
+        - any memory chagne affects only that copy
+        - thus parent and child can quickly diverge
+    - on files
+        - all files open in parent are accessible in child
+        - i/o operations in either one move the file psoition indicator
+        - stdin/ stdout/ stderr of parents are accessible in child
+
+What can the parent do?
+    - depends on application
+        - it coudl wait until child is done
+            - typical of shell like bash
+
+        - it could run concurrentluy and check back on child later
+        - it could run concurrently and ignore child
+            - if child dies - enters zombie state
+
+
+Waiting on a Child
+    #include <sys/wait.h>
+    pid_t wait(int * status);
+    pid_t waitpid(pid_t pid, int * status, int options);
+
+    -Purpose
+        - block calling process until child is terminated
+        - report status in * status (which is ignored if NULL is passed_)
+            - cause of death
+            - exit status of child (what he returned from main)
+        - return value identifies child process
+
+Zombies
+    - dead process waiting to be 'reaped' (checked by parent)
+        - you cannot kill it - because it is already dead
+        - most resources released - but still uses an entry in process table 
+    - parent should check their kids
+        - on some systems - parents can say they do not want to check
+    - when parent dies - 'init' become new parent
+        - then the zombie child child is reaped
+
+
+System Calls
+    - APIs used to request services from OS kernel
+        - Example: fork()
+        - system calls are more expensive than normal function calls
+        - manuals for system calls are in section 2
+             
+
+
+    

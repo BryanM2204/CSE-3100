@@ -1,0 +1,27 @@
+More Threads Synchronization
+
+    pthread_rwlock_t  rwlock; 		// define a read-write lock
+
+    // initialize and destroy a read-write lock
+    int pthread_rwlock_init(pthread_rwlock_t *restrict rwlock,
+            const pthread_rwlockattr_t *restrict attr); 
+    int pthread_rwlock_destroy(pthread_rwlock_t *rwlock);
+
+    // lock functions for readers and writers, and unlock
+    int pthread_rwlock_rdlock(pthread_rwlock_t *rwlock);
+    int pthread_rwlock_wrlock(pthread_rwlock_t *rwlock);
+    int pthread_rwlock_unlock(pthread_rwlock_t *rwlock);
+
+Barriers
+    #include  <pthread.h>
+    // create barrier. note the count argument
+    int pthread_barrier_init(pthread_barrier_t *restrict barrier,
+            const pthread_barrierattr_t *restrict attr, unsigned count); 
+
+    // destroy a barrier
+    int pthread_barrier_destroy(pthread_barrier_t *barrier);
+
+    // wait on a barrier. When the function returns, 
+    // one thread gets PTHREAD_BARRIER_SERIAL_THREAD, others get 0
+    int pthread_barrier_wait(pthread_barrier_t *barrier);
+

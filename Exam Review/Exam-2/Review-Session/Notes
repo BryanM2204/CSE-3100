@@ -1,0 +1,13 @@
+Exec() family
+    - execl(const char*path, const char *arg0, ..., NULL);
+        - executes file specified by path 
+        - second parameter has to be name of the process you want to run 
+        - all parameters must be specified when running execl
+
+    - execv(const char*path, const*const arg[]);
+        - takes in array of arguments pointed by argv[]
+        - have many arguments as we want
+        - first parameter must point to path of executable
+        - NULL must be last
+
+    - 

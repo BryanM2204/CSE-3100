@@ -1,0 +1,69 @@
+C Primer - Expressions and Basic Data Types
+
+Expressions
+    - Constants / variables and function calls
+    - All C expressions have a Types
+        - Constants have a Type
+        - Variables have a type  
+        - Function return values have a type  
+        - Every sub-expression of a larger expression has a type  
+
+    - Adding semicolon to an expression makes it a statement
+
+
+Basic Data Types
+    - int: an integer
+        - compiler stores them in binary
+        - hex or octal 
+            - octal: starts with a 0 and goes up to 7
+            - hex: contains 0 and x
+    - char: a single byte that can store a character in ascii
+
+    - Variables: must be declared and initialized before use
+        - declaration specify the type and name
+        - allocates memory based on type
+        - names can not start with digit
+        - multiple vars of same type can be declared together
+        Ex:
+            char c;
+                int i, j, k = 1;
+                float f;
+
+    - Operators
+        - << is cheaper than using * or using ^
+            - << multiples by 2
+
+        - Pre/post icrement/decrement 
+            -Ex: i++, ++i
+
+                c = i++; // c will be (i-1)
+                    - c is assigned to i and then it is +1
+                c = ++i; // c will be the same as i
+                    - i= i+1 and then it is assigned to c
+
+ Assignment Operators
+    - LHS = Expression
+    - LHS is something that can be written to 
+    - LHS and Expression have compatible types 
+    - The assignment is an expression that has a value
+    Ex:
+        - a = x + y;
+
+    - Assignments are expressions and "=" is an operator
+        - can be chained 
+        ex.:
+        int a, b, c;
+        a = b = c = 10;
+
+Space
+    - Operator sizeof gives number of bytes needed for a type or var
+        Ex:
+        int i;
+        sizeof(i);
+    
+Char
+    - char h1 = 'H', h2 = 72; // both are the same
+    
+    char ch = '8';
+    int x = ch - '0'; // can convert keyboard press to actual number
+

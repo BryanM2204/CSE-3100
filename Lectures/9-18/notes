@@ -1,0 +1,135 @@
+Dyanmic Memory Allocation
+
+
+
+
+
+Static / global memory pool
+    - At bottom
+    - All constants are held 
+    - Global vars
+    - All vars declared "static" are held
+
+    - Allocated when program starts
+        - dellocated when program ends
+    
+    -Fixed size
+
+
+Stack
+    - Where 
+        - memory comes from for local variables in functions
+    - easy to manage because its automatic
+        - allocated automatically when entering the functions
+        - de-allocated automatically when leaving functions
+        - scope is that of function - should not be used after function returns
+
+    - Default stack size using gcc is 2 MB
+        - need to increase size for large arrays and deep recursion
+
+Heap
+    - This is Where
+        - memory comes from for manual "On the fly" Allocation
+    - Who is in charge?
+        - Programmer for allocation / dellocation
+    - Lifetime as long as they are not freed
+
+
+Requesting Memory on the Heap
+    - #include <stdlib.h>
+    - void* malloc(size_t size);
+        - size_t is an unsigned integer data type defined in <stdlib.h>
+        - used to represent sies of objects in bytes
+    
+    -IF succesfel - call to malloc(n) returns a generic pointer
+    -IF not succesful - NULL is returned
+
+
+Generic Pointers: void*
+    - Pointer to a memory block whose content is "un-typed"
+    - use for raw memory operations or in generic functions
+    - Auto casting when assigning to other pointer types
+        int * pox = malloc(6 * sizeof(int));
+
+    - requres casting before derefercing for read/ write
+        *(int *)pv; // use pv as an int *
+    
+    - NULL, special pointer value useful for intilizations, error handling
+    #define NULL ((void*)0)
+
+
+Can't awlays get what you Want
+    - a call to malloc() may fail
+        - if out of memory
+    - in this case you get back a NULL value
+        - not much to do except report error
+
+    char* p = malloc(100); // request 100 bytes
+    if (p==NULL) {
+        // report error and finish
+        perror("Not enough memory");
+    }
+
+HOW MUCH?
+    - Need to tell malloc() how many bytes you need
+    - to rquest space for an arrya, need
+        - number of elements
+        - amoutn of space for each array element
+    
+Another way
+    #include <stdlib.h>
+    void* calloc(size_t nmemb, size_t size);
+
+    - calloc is implemented in terms of malloc()
+
+Adjusting size
+    #include <stdlib.h>
+    void* realloc (void* ptr, size_t size);
+
+    what if you change your mind?
+        - you request 100, now you need 200
+        char* p = malloc(100); 
+        p = realloc(p, 200); 
+
+        - before a call to realloc(p, size), p must be
+            - a pointer returned by a previous malloc/ calloc/ realloc
+            - or NULL, in which case the call is equivalent to malloc(size)
+
+Deallocation
+    #include <stdlib.h>
+    void free(void *ptr);
+
+    - straightforward
+        - simply ucall library function free
+        - takes a pointer to the block to free
+        free(ptr);
+
+    - do not free a pointer twice
+        - after freeing pointer, set it to NULL
+
+
+TWo Key Rules
+    1. Everything you requested should be free eventually
+    2. Only free what is allocated via malloc/ calloc/ realloc
+    
+    -consequences of not following rules:
+        - memory "leaks"
+            - your program will eveventually run out of memory
+        - undefined behavior and horrible crashes
+            - freeing unallocated memory or already freed memory
+                - may cause error and crash
+                - may corrupt heap and cause crash later
+                - worse = program keep running - totally corrupts data - and writes to disk without you realizing
+
+
+Pointers and Arrays
+     pox = malloc(6 * sizeof(int));
+
+    - looks like an array = can use pox as if it's an array
+
+
+Array of Pointers
+    - Pointers can be placed in arary
+
+    
+

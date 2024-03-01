@@ -1,0 +1,53 @@
+Function (Ch. 5)
+
+function definitons:
+    type function name( parameter_list) {
+        declrations and statements
+    }
+    - no nesting
+    - return type can be void - no return value expected
+    - if missing, compiler assumes int
+    - return statements
+        - return; // terminate eecution and return control to caller
+        - return exprs; // terminate and pas svalue of expr back 
+
+    - execution also terminates if end of function body reached
+
+
+Function Declaration (prototypes)
+    - Function can be defined in any order
+    - Declare a function before first use if definiton comes later
+        - fuction prototypes often placed in header files (and reused)
+
+        
+    - Function can declrae local variables
+        - parameters and local variables can only be accessed inside the function 
+
+
+Static and Global variables
+    - Static local variables   
+        - not visible outside function but retain value across function calls
+    - Global variables 
+        - declared outside functions; retained for entire duration of program
+        - storage class = 'extern'
+            - can be accesed from functions in other files
+        - Static global variables
+            - visible only in functions defined in same file follwoing variable declrations
+    
+    - static and global variables have side-effects
+        - retain values across function calls
+        - change the meaning of the function at each caller
+        - you cannot understand the function without holding all the code in your head
+
+        - unless for good reaosns = dont use static or global variables
+
+
+Memory Organization
+    - Every proccess has an:
+            - Address space
+
+    - Executable code is at the bottom
+    - staticsc and globals are just above 
+    - Stack is at the top (going down)
+    - heap grows from botton (going up)
+    

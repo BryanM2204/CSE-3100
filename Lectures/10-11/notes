@@ -1,0 +1,43 @@
+Exec and low-level I/O
+
+The exec family
+    - The act of 'upgrading' is done by child with system call
+    #include <unistd.h>
+    int execl(const char *path, const char *arg0,...
+        /*, (char *) NULL */ );
+
+    - The path to the executable to load inside our own address space
+    - A list of arguments to be passed to new exec
+    - a infal null pointer to give "end of argu list"
+    - if succesful, execl() does not reutrn - started a new process
+
+
+Execv family   
+    // if number of arguments is unknown at compile time
+    #include <unistd.h>
+    int execv(const char *path, char *const argv[]);
+    int execvp(const char *file, char * const argv[]);
+
+
+File APIs
+    - Remember the IO APIs
+        - the 'f' family (fopen, fclose, fread...)
+        - all these use a FILE* abstraction to represent a file
+    - UNIX has lower-level APIS for file handling
+        - Directly mapped to system calls
+        - use file descriptors
+        - deal with bytes only 
+
+
+Open a File
+    #include <fcntl.h>
+    #include <unistd.h>
+
+    int open(const char *path, int oflag)
+
+Flags is open()
+    Must include one of following:
+        - O_RDONLY, O_WRONLY
+
+
+C

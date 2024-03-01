@@ -1,0 +1,19 @@
+Inter-Process Communication with Pipes
+
+pipe()
+    #include <unistd.h>
+    int pipe(int pipefd[2]);
+
+    - creates a one-way pipe( buffer to store byte stream)
+    - Two FD's in pipefd
+        - pipe[0] is reading - pipe[1] is for writing
+    - returns 0 if succesful
+
+
+Connecting two processes
+    - parent creates  apipe and gets two FD (3 adn 4)
+    - after fork() - the child has 3, 4 too
+    - one process can write to FD 4, and the other can read from FD3
+    - if the pipe for parent to read for child to write
+        - parent close(4)
+        - 

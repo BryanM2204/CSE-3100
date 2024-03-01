@@ -1,0 +1,11 @@
+whats going on my b
+
+I/O and Files
+
+Errno
+    - most c library function can 'fail'
+        - return flag reporting failure
+        - some set global variable to report exact error code
+    
+        // to use errno, include <errno.h>
+

@@ -1,0 +1,74 @@
+Threads 1: Introduction to Basic Mangaement
+
+Circle of Life
+    - How is a thread created?
+        - By anotehr thread
+        - It is given a stack to execute and a function to run
+
+        pthread_create() 
+
+    - when process is created - there is a single thread [starts alone]
+
+    - How does a thread die?
+        - voluntarily - call pthread_exit()
+        - requested by another thread - pthread_cancel()
+        - when process dies
+            - exit() will kill all threads
+
+    
+    Pthreads API
+    #include <pthread.h>
+
+        - add '-pthread' option to compile in linux
+        cc -pthread a.c
+
+        - pthread functions do not set errno on errors
+
+        - many types are defined in pthread library - they are opaque objects
+            - cannot make assumptions on the representation / implemenetation
+            ex. - dont use equal to compare - use pthread_equal
+
+
+Main() function of thread
+    - void * thread_main(void * arg)
+
+    - the "main" function of a thread
+        - can be any name
+    - takes a pointer as the only parameter
+        - it can take anything - int - char - string - struct
+    - returns a pointer
+
+
+Threads Creation
+    - int pthread_create()
+        - returns 0 if succesful - non zero if errors
+        - *thread = returned thread ID if succesful
+        - attr - specifices the attribute for the thread - NULL for default
+        - start_routine() = main function of the thread
+        - void *arg = passed to start_routine()
+
+    - thread is equivalent to fork() - but it creates instead of just cloning 
+    - once threads are created - no heirarchy - can create other threads
+
+
+Thread Concurrency
+    - if single-core - timesharing
+
+
+Thread Termination
+    - return from start_routine function or 
+    - call pthread_exit()
+         
+        void pthread_exit(void* status)
+
+    - The function always succeeds and does not return
+    - status can be obtained by other threads
+
+Joining a thread 
+    - int pthread_join(pthread_t tid, void ** status)
+
+    - wait fro thread to complete
+        - blocks the calling thread until thread tid termiantes
+    - can obtain the exit status of the thread
+        - pass NULL to ignore the return value
+    - equivalent of waitpid()

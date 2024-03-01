@@ -1,0 +1,105 @@
+Lecture 8: Linked Lists, Ennums, and Function Pointers
+
+Linked Lists 
+    - Data structure that consists of chain of nodes
+    - start from head,a node has a reference to the next node
+
+    typedef struct node_tag {
+        int v;                  // data
+        struct node_tag * next; // a pointer to this type of struct
+    } node;                     // define a type - easier to use
+
+
+Head
+    - node * head // head is a pitner, not a node
+    - head = NULL; // at beginning - it is empty
+
+
+Create a Node
+    - node * new_node(int v)
+    {
+        node * p = malloc(sizeof(node)); // dynamically allocate memory
+        assert(p != NULL)
+
+        //set the value in the node
+        p->v= v;
+        p->next = NULL;
+        return p;
+    }
+
+
+Prepend
+    node * prepend(node * head, node *newnode)
+    {
+        newnode->next = head;
+        return newnode;
+    }
+
+
+Find the last one  
+    node * find_last(node *head)
+    {
+        if (head != NULL) {
+            while(head->next != NULL){
+                head = head->next;
+            }
+        }
+        return head;
+    }
+
+
+Append 
+    node * append(node * head, node * newnode)
+    {
+        node *last = find_last(head)
+        if (last == NULL)
+            return newnode;
+        last->next = newnode;
+        newnode->next = NULL;
+        return head;
+    }
+
+
+Enumeration Types (ABC 7.5)
+    
+
+Type Qualifier: const
+    // constant int
+    const int a = 10; // cannot change a
+
+    // a pointer to a constant int
+    const int *pa = &a // can change pa, but not *pa
+
+    //a constant pointer to an int
+    int * const pb = &b; // can change *pb, but not pb
+
+    //constant pointer to constant int
+    const int* const pc = &a;//cannot change either of them
+
+
+Function Pointers
+    /* function returning integer */
+    int func();
+
+    function returning poniter to int
+    int * func();
+
+    pointer to function return integer
+    int (*func)();
+
+    pointer to function returning pointer to int */
+    int * (*func)();
+
+
+Purpose of Function Pointers
+    - Call-back mechanism
+        - generic functions
+        - pthread_create()
+        - dynamic signal handlers
+
+    - You can store function pointers in arrays
+        - and arrays stored in structures
+
+
+
+
